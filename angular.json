@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "geolocation"
+    }
+  },
+  "defaultProject": "geolocation",
+  "cli": {
+    "analytics": false
+  }
 }

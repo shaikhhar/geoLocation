@@ -1,0 +1,48 @@
+<div class="back-button" [routerLink]="['/page1']">
+  <span class="text-light">
+    <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+  </span>
+</div>
+<div class="text-center text-danger mt-4">
+  <i class="fa fa-picture-o fa-5x fa-flip-horizontal" aria-hidden="true"></i>
+  <h3 class="mt-2">Add a Photo</h3>
+</div>
+
+<form class="px-3 mt-5">
+  <div class="form-group">
+    <label>Property Address</label>
+    <input
+      ngx-google-places-autocomplete
+      #placesRef="ngx-places"
+      (onAddressChange)="handleAddressChange($event)"
+      class="form-control"
+      [value]="searchedLocation"
+      placeholder="address of property"
+    />
+  </div>
+
+  <div class="form-group mt-3">
+    <label> Property Title</label>
+    <input
+      type="text"
+      [(ngModel)]="propertyTitle"
+      name="title"
+      class="form-control"
+    />
+  </div>
+
+  <div class="form-group mt-3">
+    <label> Describe more about your property</label>
+    <textarea
+      [(ngModel)]="description"
+      name="description"
+      cols="30"
+      rows="5"
+      class="form-control"
+    ></textarea>
+  </div>
+</form>
+
+<button class="btn btn-danger btn-lg ad-btn" (click)="post()">
+  POST
+</button>

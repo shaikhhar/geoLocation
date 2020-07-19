@@ -1,0 +1,26 @@
+<div class="search">
+  <input
+    ngx-google-places-autocomplete
+    #placesRef="ngx-places"
+    (onAddressChange)="handleAddressChange($event)"
+  />
+
+  <button (click)="search()" class="search-btn">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+</div>
+
+<agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  class="map"
+  [zoom]="zoom"
+  (mapClick)="onChosenPlace($event)"
+>
+  <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="placeSelected">
+  </agm-marker>
+</agm-map>
+
+<button class="btn btn-danger btn-lg ad-btn" (click)="post()">
+  POST YOUR AD
+</button>

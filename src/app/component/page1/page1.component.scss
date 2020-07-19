@@ -1,0 +1,46 @@
+.map {
+  height: 84vh;
+}
+
+input,
+.search-btn {
+  border: 1px solid rgb(139, 137, 137);
+  background-color: white;
+}
+.search-btn {
+  border-left: none;
+}
+
+.search {
+  position: absolute;
+  top: 100px;
+  z-index: 1;
+  margin-left: 15vw;
+}
+
+input {
+  width: 70vw;
+  border-right: none;
+}
+
+.ad-btn {
+  width: 50vw;
+  position: absolute;
+  bottom: 5vh;
+  margin-left: 25vw;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .ad-btn {
+    width: 20vw;
+    margin-left: 40vw;
+    margin-right: 40vw;
+  }
+  input {
+    width: 40vw;
+  }
+  .search {
+    margin-left: 30vw;
+  }
+}
