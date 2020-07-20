@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -35,18 +35,26 @@ export class LocationService {
   }
 
   getLocationDefault() {
-    return this.http
-      .get<ILocation>(
-        'http://api.ipapi.com/api/check?access_key=a1b56d2b0228ecf75cd39382f4efe1bb'
-      )
-      .pipe(
-        map((locationObject) => {
-          return {
-            lat: locationObject.latitude,
-            lng: locationObject.longitude,
-          };
+    // return this.http
+    //   .get<ILocation>(
+    //     'http://api.ipapi.com/api/check?access_key=a1b56d2b0228ecf75cd39382f4efe1bb'
+    //   )
+    //   .pipe(
+    //     map((locationObject) => {
+    //       return {
+    //         lat: locationObject.latitude,
+    //         lng: locationObject.longitude,
+    //       };
+    //     })
+    //   );
+    return from(
+      fetch('https://location.services.mozilla.com/v1/geolocate?key=test')
+        .then((el) => el.json())
+        .then((res) => {
+          console.log(res.location);
+          return res.location;
         })
-      );
+    );
   }
 
   getLocationFromAddress(address: string) {
