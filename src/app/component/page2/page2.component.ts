@@ -26,8 +26,13 @@ export class Page2Component implements OnInit {
 
   post() {
     console.log(this.searchedLocation);
-    // this.locationService.setSearchedAddress(this.searchedLocation);
+    this.locationService.setSearchedAddress(this.searchedLocation);
     // this.locationService.setIsPlaceSelected(true);
+    this.locationService
+      .getLocationFromAddress(this.searchedLocation)
+      .subscribe((location) => {
+        this.locationService.addMarkedLocation(location);
+      });
     this.router.navigate(['/page1']);
   }
 }

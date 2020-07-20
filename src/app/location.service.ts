@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 export interface ILocation {
-  latitude: number;
-  longitude: number;
+  lat: number;
+  lon: number;
 }
 
 @Injectable({
@@ -16,10 +16,22 @@ export class LocationService {
 
   searchedAddress$ = new BehaviorSubject<string>(null);
 
+  markedLocations$ = new BehaviorSubject<ILocation[]>([]);
+
   constructor(private http: HttpClient) {}
 
   setSearchedAddress(address: string) {
     this.searchedAddress$.next(address);
+  }
+
+  getMarkedLocation() {
+    return this.markedLocations$.asObservable();
+  }
+
+  addMarkedLocation(location: ILocation) {
+    const markedLocation = this.markedLocations$.value;
+    markedLocation.push(location);
+    this.markedLocations$.next(markedLocation);
   }
 
   getSearchedAddress() {

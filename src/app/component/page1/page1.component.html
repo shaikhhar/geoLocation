@@ -17,8 +17,14 @@
   [zoom]="zoom"
   (mapClick)="onChosenPlace($event)"
 >
-  <agm-marker [latitude]="lat" [longitude]="lng" *ngIf="placeSelected">
-  </agm-marker>
+  <ng-container *ngIf="placeSelected">
+    <agm-marker
+      [latitude]="location.lat"
+      [longitude]="location.lng"
+      *ngFor="let location of markedLocation"
+    >
+    </agm-marker>
+  </ng-container>
 </agm-map>
 
 <button class="btn btn-danger btn-lg ad-btn" (click)="post()">

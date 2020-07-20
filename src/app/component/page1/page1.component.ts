@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from 'src/app/location.service';
+import { LocationService, ILocation } from 'src/app/location.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -16,6 +16,7 @@ export class Page1Component implements OnInit {
   placeSelected: boolean;
   locationSub: Subscription;
   searchedAddress: string = null;
+  markedLocation: ILocation[];
 
   constructor(
     private locationService: LocationService,
@@ -28,6 +29,11 @@ export class Page1Component implements OnInit {
 
   initialize() {
     console.log('init searchedPlace ', this.searchedAddress);
+    console.log('init markedPlace', this.markedLocation);
+    this.locationService.getMarkedLocation().subscribe((markedLocations) => {
+      this.markedLocation = markedLocations;
+    });
+
     this.locationService.getIsPlaceSelected().subscribe((isSelected) => {
       this.placeSelected = isSelected;
     });
@@ -52,6 +58,7 @@ export class Page1Component implements OnInit {
         this.lng = latlng.lng;
         this.locationService.setIsPlaceSelected(true);
         this.locationService.setSearchedAddress(this.searchedAddress);
+        this.locationService.addMarkedLocation(latlng);
         this.zoom = 15;
       });
   }
@@ -68,6 +75,7 @@ export class Page1Component implements OnInit {
       this.searchedAddress = address;
       this.locationService.setIsPlaceSelected(true);
       this.locationService.setSearchedAddress(address);
+      this.locationService.addMarkedLocation(event.coords);
     });
   }
 
