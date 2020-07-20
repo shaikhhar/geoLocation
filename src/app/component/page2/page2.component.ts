@@ -17,7 +17,7 @@ export class Page2Component implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchedLocation = this.locationService.searchedLocation$.value;
+    this.searchedLocation = this.locationService.searchedAddress$.value;
   }
 
   handleAddressChange(address: any) {
@@ -26,8 +26,8 @@ export class Page2Component implements OnInit {
 
   post() {
     console.log(this.searchedLocation);
-    this.locationService.setSearchedLocation(this.searchedLocation);
-    this.locationService.setPlaceSelected(true);
+    // this.locationService.setSearchedAddress(this.searchedLocation);
+    // this.locationService.setIsPlaceSelected(true);
     this.router.navigate(['/page1']);
   }
 }
